@@ -2,22 +2,26 @@ import { useState } from 'react'
 
 const Button = ({ handleClick, text }) => <button onClick={() => handleClick(text)}>{text}</button>
 
-const StatisticLine = ({ counter, text }) => <p>{text} {counter}</p>
+const StatisticLine = ({ counter, text }) =>
+  <tr>
+    <td>{text}</td>
+    <td>{counter}</td>
+  </tr>
 
 const Statistics = ({ good, neutral, bad, all, average, positive }) => {
-  if (good > 0 || neutral > 0 || bad > 0)
-    return (
-      <div>
+  if (all === 0) return <p>No feedback given</p>
+  else return (
+    <table>
+      <tbody>
         <StatisticLine counter={good} text='good'/>
         <StatisticLine counter={neutral} text='neutral'/>
         <StatisticLine counter={bad} text='bad'/>
         <StatisticLine counter={all} text='all'/>
         <StatisticLine counter={average} text='average'/>
         <StatisticLine counter={positive + ' %'} text='positive'/>
-      </div>
-    )
-  else
-    return <p>No feedback given</p>
+      </tbody>
+    </table>
+  )
 }
 
 const App = () => {
